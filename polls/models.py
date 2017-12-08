@@ -23,7 +23,7 @@ class Poll(models.Model):
     def __str__(self):
         return self.question
 
-
+@python_2_unicode_compatible
 class Choice(models.Model):
     poll = models.ForeignKey(Poll)
     choice = models.CharField(max_length=255)
@@ -31,19 +31,19 @@ class Choice(models.Model):
     def count_votes(self):
         return self.vote_set.count()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.choice
 
     class Meta:
         ordering = ['choice']
 
-
+@python_2_unicode_compatible
 class Vote(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     poll = models.ForeignKey(Poll)
     choice = models.ForeignKey(Choice)
 
-    def __unicode__(self):
+    def __str__(self):
         return u'Vote for %s' % (self.choice)
 
     class Meta:
